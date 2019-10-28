@@ -20,6 +20,8 @@ Prendas
       <h3 class="box-title">Detalle prendas</h3>
       <br>          
       <button class="btn-primary form-control" v-on:click="ShowModal()">Nueva prenda +</button>
+      <br>
+      <button class="btn-primary form-control" v-on:click="ShowModalCat()">Categorias</button>
     </div>
   </div>
 </div>  
@@ -111,7 +113,7 @@ Prendas
                           <select class="form-control" v-model="categoria">
                           <option disabled="" selected="">Elije una categoria</option>
                           <option v-for="categor in categorias" v-bind:value="categor.categoria">@{{ categor.categoria }}</option>
-                        </select>
+                           </select>
                         <br>
                         
 
@@ -142,7 +144,55 @@ Prendas
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+         <div class="modal fade" tabindex="-1" role="dialog" id="add_categoria">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                        <h4 class="modal-title" v-if="!editando">Categorias</h4>
+                        
+                    </div>
+                    <div class="modal-body ">
+                         <table class="table table-condensed table-bordered table-hover" >
+                <thead>
+                  <th width="19%">Categoria</th>
+                  
+                  <th width="5%">Opciones</th>
+                </thead>
+                <tr v-for="categoria in categorias">
+              <td>@{{categoria.categoria}}</td>
+              
+             <td>
+                {{-- <span class="glyphicon glyphicon-cog btn btn-sm"v-on:click="asigSelected(index)"></span> --}}
+
+                <span class="fa fa-pencil btn btn-sm" v-on:click="editCategoria(categoria.categoria)"></span>
+              </td>
+            </tr>
+
+
+           
+
+                <tbody>
                 
+        </tbody>
+          
+        <tfoot>
+            
+        </tfoot>
+      </table>
+      <br>
+      <input type="text" name="" class="form-control" placeholder="Categoria nueva" v-model="categoria">
+      <button type="submit" class="btn btn-primary" v-on:click="addCategoria()" v-if="!editandoCategoria">Agregar</button>
+      <button type="submit" class="btn btn-primary" v-on:click="updateCategoria(auxCategoria)" v-if="editandoCategoria" >Actualizar</button>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="clearComponents()">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
                 
                 
     </div>

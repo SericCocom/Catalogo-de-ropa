@@ -26,10 +26,12 @@ new Vue({
 			categoria:'',
 			productos:[],
 			categorias:[],
+			auxCategoria:'',
 			albums:[],
 			editando:false,
 			auxClave:'',
-			encontrado:false
+			encontrado:false,
+			editandoCategoria:false
 		},
 		methods:{
 			onFileChange(e){
@@ -99,6 +101,7 @@ new Vue({
 						var confirmar=confirm('La clave de producto ya está registrado,¿Desea cargar los datos guardados?');
 						if (confirmar) {
 							this.editProducto(this.clave);
+							this.encontrado=false;
 						}else{
 							$('#add_mutuario').modal('hide');
 							this.clearComponents();
@@ -149,11 +152,42 @@ new Vue({
 					  	this.clearComponents();
 					  });
 				},
+				ShowModalCat:function(){
+					$('#add_categoria').modal('show');
+					this.getCategorias();
+				},
+				editCategoria:function(id){
+					this.editandoCategoria=true;
+					this.$http.get(UrlCat + '/'+ id).then(
+					function(response){
+					this.categoria=response.data.categoria;
+					this.auxCategoria=response.data.categoria;
+					});
+				},
+				updateCategoria:function(id){
+					var Categoria={
+						categoria:this.categoria
+					}
+					this.$http.patch(UrlCat+ '/'+ id,Categoria).then(function(response){
+					  	this.getCategorias();
+					  	
+					  	this.editandoCategoria=false;
+					  	this.categoria='';
+					  });
+				},
+				addCategoria:function(){
+					var Categoria={
+						categoria:this.categoria
+					}
 
 
+					this.$http.post(UrlCat,Categoria).then(function(response){
+					  		this.getCategorias();
+					  	this.clearComponents();
+					  	this.categoria='';
+					  })
 
-
-
+				},
 				clearComponents:function(){
 					this.clave= '';
 				this.nombre= '';

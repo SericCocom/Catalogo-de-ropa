@@ -10,7 +10,7 @@ class Categorias extends Model
     protected $table='categorias';
 
    	// Se especificar la clave primaria
-   	protected $primaryKey='clave';
+   	protected $primaryKey='categoria';
    	//Solo cuando la PK no sea numerica
    	public $incrementing=false;
    	//Activo las etiquetas de tiempo

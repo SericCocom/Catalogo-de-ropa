@@ -73,7 +73,7 @@
 								<a href="shoping-cart.html">Mi carrito</a>
 							</li>
 							<li>
-								<a href="about.html">A cerca de </a>
+								<a href="{{ url('about') }}">A cerca de </a>
 							</li>
 							<li>
 								<a href="contact.html">Contacto</a>
@@ -144,7 +144,7 @@
 				</li>
 
 				<li>
-					<a href="about.html">Nosotros</a>
+					<a href="{{ url('about') }}">Nosotros</a>
 				</li>
 
 				<li>
