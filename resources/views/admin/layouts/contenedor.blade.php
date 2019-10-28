@@ -186,7 +186,7 @@ desired effect
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('prod') }}">Ver productos</a></li>
-            <li><a href="{{ url('ima') }}">Subir catálogo</a></li>
+            <li><a href="{{ url('ima') }}">Subir album</a></li>
             
             
             

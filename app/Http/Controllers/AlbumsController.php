@@ -29,7 +29,7 @@ class AlbumsController extends Controller
     {
      $albums=new Albums;
      $albums->id_album =$request->get('id_album');
-    
+    $albums->album =$request->get('album');
      $albums->save();
      return $albums;
 

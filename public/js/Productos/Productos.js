@@ -15,14 +15,17 @@ new Vue({
 		el:'#Productos',
 		created:function(){
 			this.getProductos();
+			this.imagen='fotoportada.jpg';
 		},
 		data:{
+			album:'',
 			imagen:'',
 			clave:'',
 			talla:'',
 			precioventa:'',
 			preciocompra:'',
 			id_album:'',
+			auxAlbum:'',
 			categoria:'',
 			productos:[],
 			categorias:[],
@@ -31,7 +34,8 @@ new Vue({
 			editando:false,
 			auxClave:'',
 			encontrado:false,
-			editandoCategoria:false
+			editandoCategoria:false,
+			editandoAlbum:false
 		},
 		methods:{
 			onFileChange(e){
@@ -188,8 +192,58 @@ new Vue({
 					  })
 
 				},
+				ShowModalAlbum:function(){
+					$('#album').modal('show');
+					this.getAlbums();
+				},
+				addAlbum:function(){
+					var Album={
+						id_album:this.id_album,album:this.album
+					}
+
+					this.$http.post(UrlAl,Album).then(function(response){
+					  		this.getAlbums();
+					  		this.album='';
+					  		this.id_album='';
+					  })
+
+				},
+					
+				editAlbum:function(id){
+							this.editandoAlbum=true;
+							$('#add_album').modal('show');
+					this.$http.get(UrlAl + '/'+ id).then(
+					function(response){
+					this.id_album=response.data.id_album;
+					this.album=response.data.album;
+					this.auxAlbum=response.data.id_album
+					});
+
+				},
+			showModalAl:function(){
+				alert('Agregar');
+				$('#add_album').modal('show');
+			},
+				hideModaAl:function(){
+					$('#add_album').modal('hide');
+				},
+				updateAlbum:function(id){
+					var Album={
+						id_album:this.id_album,album:this.album
+					}
+
+					this.$http.patch(UrlAl+ '/'+ id,Album).then(function(response){
+					  	this.getAlbums();
+					  	this.editandoAlbum=false;
+					  	this.album='';
+					  	this.id_album='';
+					  });
+
+
+				},
+
 				clearComponents:function(){
-					this.clave= '';
+				this.clave= '';
 				this.nombre= '';
 				this.talla= '';
 				this.precioventa= '';
@@ -197,7 +251,7 @@ new Vue({
 				this.id_album='';
 				this.categoria= '';
 				this.auxClave='';
-				this.imagen='fotoportada.jpg'
+				this.imagen='fotoportada.jpg';
 				}
 
 
