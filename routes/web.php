@@ -22,6 +22,15 @@ Route::get('index', function () {
     return view('front.index');
 });
 
+Route::get('about', function () {
+    //return view('admin.layouts.contenedor');
+    return view('front.about');
+});
+
+
+
+
+
 Route::get('/', function () {
     //return view('admin.layouts.contenedor');
     return view('admin.login');

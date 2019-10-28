@@ -1,4 +1,7 @@
 @extends('front.layouts.main')
+@section('title')
+<title>Inicio</title>
+@endsection
 @section('Ban')
 <!-- Slider -->
 	<section class="section-slide">
