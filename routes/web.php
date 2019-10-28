@@ -19,7 +19,7 @@ Route::get('login_cli', function () {
 
 Route::get('index', function () {
     //return view('admin.layouts.contenedor');
-    return view('front.layouts.main');
+    return view('front.index');
 });
 
 Route::get('/', function () {
