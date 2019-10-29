@@ -51,6 +51,22 @@
 					
 				</div>
 			</div>
+			<br>
+			<br>
+			<br>
+			{!! $errors->first('succes','<div class="alert alert-success alert-block">
+	<button type="button" class="close" data-dismiss="alert">×</button>	
+        <strong>:message</strong>
+			</div>') !!}
+
+			{!! $errors->first('fail','<div class="alert alert-danger alert-block">
+	<button type="button" class="close" data-dismiss="alert">×</button>	
+        <strong>:message</strong>
+			</div>') !!}
+
+
+			
+
 
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
@@ -63,7 +79,9 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							
+							<li>
+								{{ Session::get('nombre') }} {{ Session::get('apellidop') }} {{ Session::get('apellidom') }}
+							</li>
 
 							<li>
 								<a href="product.html">Productos</a>
@@ -255,13 +273,6 @@
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					
-				</div>
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					
-				</div>
 
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
@@ -287,23 +298,67 @@
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						Quieres una cuenta?
-					</h4>
+				<div class="col-lg-5 col-lg-7 p-b-50">
+					<form action="{{ route('solicitud') }}" method="POST">
+						{{ csrf_field() }}
+						<div class="flex-w flex-c-m m-tb-10">
+								<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+										<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+										<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									 Quiero una cuenta !!
+								</div>
 
-					<form>
+						</div>
+				
+				
+
+				<!-- Filter -->
+				<div class="dis-none panel-filter w-full p-t-20">
+						<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-20 p-lr-10-sm">
+							<div class="filter-col5 p-r-15 p-b-20">
+								<div class="mtext-102 cl2 p-b-15">
+										LLenar datos
+								</div>
+									<input type="text" name="curp" placeholder="CURP" class="form-control {!! $errors->has('curp') ? 'has-error':'' !!} " value="{{ old('curp') }}"  >
+									 {!! $errors->first('curp','<span class="help-block">:message</span>') !!}
+									 {!! $errors->first('existe','<span class="help-block">:message</span>') !!}
+									<br>
+									<input type="text" name="nombre" placeholder="Nombre" class="form-control {!! $errors->has('nombre') ? 'has-error':'' !!} " value="{{ old('nombre') }}"  >
+									 {!! $errors->first('nombre','<span class="help-block">:message</span>') !!}
+									<br>
+									<input type="text" name="apellidop" placeholder="Apellido paterno" class="form-control {!! $errors->has('apellidop') ? 'has-error':'' !!} " value="{{ old('apellidop') }}"  >
+									 {!! $errors->first('apellidop','<span class="help-block">:message</span>') !!}									<br>
+									<input type="text" name="apellidom" placeholder="Apellido materno" class="form-control {!! $errors->has('apellidom') ? 'has-error':'' !!} " value="{{ old('apellidom') }}"  >
+									 {!! $errors->first('apellidom','<span class="help-block">:message</span>') !!}
+									<br>
+									<input type="text" name="telefono" placeholder="Teléfono" class="form-control {!! $errors->has('telefono') ? 'has-error':'' !!} " value="{{ old('telefono') }}"  >
+									 {!! $errors->first('telefono','<span class="help-block">:message</span>') !!}
+									<br>
+									<input type="text" name="direccion" placeholder="Dirrección" class="form-control {!! $errors->has('direccion') ? 'has-error':'' !!} " value="{{ old('direccion') }}"  >
+									 {!! $errors->first('direccion','<span class="help-block">:message</span>') !!}
+									<br>
+									<input type="text" name="email" placeholder="Correo" class="form-control {!! $errors->has('email') ? 'has-error':'' !!} " value="{{ old('email') }}"  >
+									 {!! $errors->first('email','<span class="help-block">:message</span>') !!}
+									<br>
+									<input type="text" name="usuario" placeholder="Usuario" class="form-control {!! $errors->has('usuario') ? 'has-error':'' !!} " value="{{ old('usuario') }}"  >
+									 {!! $errors->first('usuario','<span class="help-block">:message</span>') !!}
+									<br>
+									<input type="text" name="password" placeholder="Contraseña" class="form-control {!! $errors->has('password') ? 'has-error':'' !!} " value="{{ old('password') }}"  >
+									 {!! $errors->first('password','<span class="help-block">:message</span>') !!}
+									<br>
+									
+							
+							</div>
+						</div>
+					<div class="p-t-18">
+						{!! $errors->first('succes','<span class="help-block">:message</span>') !!}
+					<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 	trans-04">
+					Enviar!
+					</button>
+					</div>
+				</div>
+
 						
-						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="Dejanos tu número">
-							<div class="focus-input1 trans-04"></div>
-						</div>
-
-						<div class="p-t-18">
-							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								Lo quiero!
-							</button>
-						</div>
 					</form>
 				</div>
 			</div>

@@ -70,8 +70,6 @@ class LoginController extends Controller
             'password'=>'required|string'
 
         ]);
-     
-
     $usuario=$request->get('usuario');
     $password=$request->get('password');
     
@@ -87,17 +85,18 @@ class LoginController extends Controller
             ->first();
 
              if (!empty($datos2)) {
-                 $empleado=DB::table('clientes')->select('password','nombre','apellidop','apellidom','curp')
+                 $cliente=DB::table('clientes')->select('password','nombre','apellidop','apellidom','curp')
             ->where('usuario',$usuario)
             ->where('password',$password)
             ->get();
-            Session::put('curp',$empleado[0]->curp);
-            Session::put('nombre',$empleado[0]->nombre);
-            Session::put('apellidop',$empleado[0]->apellidop);
-            Session::put('apellidom',$empleado[0]->apellidom);
+            Session::put('curp',$cliente[0]->curp);
+            Session::put('nombre',$cliente[0]->nombre);
+            Session::put('apellidop',$cliente[0]->apellidop);
+            Session::put('apellidom',$cliente[0]->apellidom);
             
 
-                return  'Sesion iniciada';
+                return  view('front.index')
+                ->with();
                 }
             else{
               return back()->withErrors(['password'=>'Contraseña incorrecta'])

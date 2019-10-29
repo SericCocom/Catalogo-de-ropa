@@ -1,7 +1,7 @@
 function init(){
 
 var Url='http://localhost/CasaEmp/public/mutuarios'
-
+var UrlSoli='http://localhost/CasaEmp/public/solicitudes'
 new Vue({
 	http:{
 			headers:{
@@ -23,6 +23,7 @@ new Vue({
 			usuario:'',
 			password:'',
 			mutuarios:[],
+			solicitudes:[],
 			editando:false,
 			auxCurp:''
 		},
@@ -32,6 +33,14 @@ new Vue({
 					function(response){
 						console.log(response);
 						this.mutuarios=response.data;
+					});
+				},
+					getSolicitudes:function(){
+					this.$http.get(UrlSoli).then(
+					function(response){
+						console.log(response);
+						this.solicitudes=response.data;
+						$('#solicitudes').modal('show');
 					});
 				},
 				ShowModal:function(){
@@ -80,6 +89,16 @@ new Vue({
 					  	this.editando=false;
 					  	this.clearComponents();
 					  });
+				},
+				AutotizarSolicitud:function(id,nombre){
+					
+					var Confirmar=confirm('Desea aceptar la solicitud de ' + nombre +'?');
+					if (Confirmar) {
+						this.$http.patch(UrlSoli+ '/'+ id).then(function(response){
+					  		this.getSolicitudes();
+					  		this.getMutuarios();
+					  });
+					}
 				},
 				clearComponents:function(){
 					this.curp= '';

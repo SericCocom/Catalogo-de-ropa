@@ -36,6 +36,12 @@ Route::get('/', function () {
     return view('admin.login');
 });
 Route::apiResource('mutuarios','ClentesController');
+Route::apiResource('solicitudes','SolicitudesController');
+
+
+
+
+
 Route::apiResource('empleados','EmpleadosController');
 Route::apiResource('productos','ProductosController');
 Route::apiResource('categorias','CategoriasController');
@@ -47,6 +53,10 @@ Route::resource('file', 'FileController');
 
 
 Route::post('login','Auth\LoginController@login')->name('login');
+Route::post('solicitud','ClentesController@Solicitud')->name('solicitud');
+
+
+
 Route::post('loginCl','Auth\LoginController@loginCli')->name('loginCl');
 Route::get('mutua','Auth\LoginController@Mutuarios')->name('mutua');
 Route::get('emple','Auth\LoginController@Empleados')->name('emple');
@@ -64,12 +74,4 @@ Route::get('ima',function(){
 });
 
 Route::get('logout','Auth\LoginController@salir');
-
-
-
-
-
-
-
-//Route::get('im', 'FileController@create');
 Route::post('images-save', 'ImagenController@store')->name('images-save');

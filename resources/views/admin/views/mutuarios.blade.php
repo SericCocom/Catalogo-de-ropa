@@ -12,8 +12,20 @@ Clientes
           
           
             <div class="box-header">
-              <h3 class="box-title">Detalle clientes</h3>
-              <button class="btn-primary" v-on:click="ShowModal()">Nuevo clientes +</button>
+             
+            <div class="col-lg-2">
+              <div class="input-group">
+                        <h3 class="box-title">Detalle clientes</h3>
+                         <button class="btn-primary form-control" v-on:click="ShowModal()">Nuevo clientes +</button>
+                </div>
+             </div>
+
+  <div class="col-lg-1">
+    <div class="input-group">
+      <br>
+      <button class="btn-primary form-control" v-on:click="getSolicitudes()">Solicitudes</button>
+    </div>
+  </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -56,10 +68,6 @@ Clientes
     					
     				
     				<td><h3> 	</h3></td>
-    				
-           
-
-
     				{{--<td class="btn btn-danger"><h4>{{$totales[1]}}</h4></td>
     				<td class="btn btn-danger"><h4>{{$totales[2]}}</h4></td>
     				--}}
@@ -112,6 +120,64 @@ Clientes
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="solicitudes">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" >Solicitudes</h4>
+                        <table class="table table-condensed table-bordered table-hover" >
+                <thead>
+                  <th width="19%">CURP</th>
+                  <th width="30%">Nombre</th>
+                  <th width="25%">Dirección </th>
+                  
+                  <th width="23%">Teléfono</th>
+                  
+                  <th width="5%">Opciones</th>
+                  
+                </thead>
+
+
+            <tr v-for="solicitud in solicitudes">
+              <td>@{{solicitud.curp}}</td>
+              <td>@{{solicitud.nombre}} @{{solicitud.apellidop}} @{{solicitud.apellidom}}</td>
+              <td>@{{solicitud.direccion}}</td>
+              
+              <td>@{{solicitud.telefono}}</td>
+              
+              <td>
+                {{-- <span class="glyphicon glyphicon-cog btn btn-sm"v-on:click="asigSelected(index)"></span> --}}
+
+                <span class="fa fa-check"  v-on:click="AutotizarSolicitud(solicitud.curp,solicitud.nombre)"></span>
+
+              </td>
+            </tr>
+
+                <tbody>
+                
+        </tbody>
+          
+        <tfoot>
+        </tfoot>
+      </table>
+                    </div>
+                    <div class="modal-body ">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+
+
                 
                 
                 
