@@ -95,8 +95,7 @@ class LoginController extends Controller
             Session::put('apellidom',$cliente[0]->apellidom);
             
 
-                return  view('front.index')
-                ->with();
+                return  view('front.index');
                 }
             else{
               return back()->withErrors(['password'=>'Contraseña incorrecta'])

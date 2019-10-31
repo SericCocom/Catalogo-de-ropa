@@ -27,8 +27,8 @@ Route::get('about', function () {
     return view('front.about');
 });
 
-
-
+Route::get('inicio','ListController@Vistas');
+Route::apiResource('listas','ListController');
 
 
 Route::get('/', function () {
@@ -37,7 +37,7 @@ Route::get('/', function () {
 });
 Route::apiResource('mutuarios','ClentesController');
 Route::apiResource('solicitudes','SolicitudesController');
-
+Route::apiResource('comentarios','ComentariosController');
 
 
 

@@ -122,6 +122,7 @@ Prendas
                         <input type="text" name="" placeholder="Precio venta" v-model="precioventa" class="form-control">
                         <br>
                         <input type="text" name="" placeholder="Precio compra" v-model="preciocompra" class="form-control">
+                        <input type="text" name="" placeholder="Descripcion" v-model="descripcion" >
                         <br>
                       
                         <br>

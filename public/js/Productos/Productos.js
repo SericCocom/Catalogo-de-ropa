@@ -35,8 +35,9 @@ new Vue({
 			auxClave:'',
 			encontrado:false,
 			editandoCategoria:false,
-			editandoAlbum:false
-		},
+			editandoAlbum:false,
+			descripcion:''
+		}, 
 		methods:{
 			onFileChange(e){
 				this.imagen = e.target.files[0];
@@ -85,6 +86,7 @@ new Vue({
 						Producto.append('categoria',this.categoria);
 						Producto.append('photo',this.imagen);
 						Producto.append('id_album',this.id_album);
+						Producto.append('descripcion',this.descripcion);
 						let config={
 							header :{
 								'Content-type' : 'image/jpg'
@@ -133,6 +135,7 @@ new Vue({
 				this.categoria= response.data.categoria;
 				this.auxClave=response.data.clave;
 				this.imagen=response.data.photo;
+				this.descripcion=response.data.descripcion;
 					});
 
 
@@ -146,7 +149,7 @@ new Vue({
 				updateProductos:function(id){
 				var Producto={
 						clave:this.clave,talla:this.talla,precioventa:this.precioventa,
-						preciocompra:this.preciocompra,id_album:this.id_album,categoria:this.categoria
+						preciocompra:this.preciocompra,id_album:this.id_album,categoria:this.categoria,descripcion:this.descripcion
 					}
 
 					this.$http.patch(Url+ '/'+ id,Producto).then(function(response){
@@ -252,6 +255,7 @@ new Vue({
 				this.categoria= '';
 				this.auxClave='';
 				this.imagen='fotoportada.jpg';
+				this.descripcion='';
 				}
 
 

@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Productos extends Model
+class Comentarios extends Model
 {
 	
-    protected $table='productos';
+    protected $table='comentarios';
 
    	// Se especificar la clave primaria
-   	protected $primaryKey='clave';
+   protected $primaryKey='id_usuario';
    	//Solo cuando la PK no sea numerica
    	public $incrementing=false;
    	//Activo las etiquetas de tiempo
-   	public $timestamps=false;
+   	public $timestamps=true;
    	//Definimos los campos que van a recibir valor
    	protected $fillable=[
    	'clave',
