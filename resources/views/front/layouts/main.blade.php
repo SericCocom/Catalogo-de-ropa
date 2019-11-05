@@ -103,7 +103,7 @@
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
 						
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ $numero[0]->num }}">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -190,69 +190,44 @@
 				</div>
 			</div>
 			
-			<div class="header-cart-content flex-w js-pscroll">
+			<div class="header-cart-content flex-w js-pscroll" >
 				<ul class="header-cart-wrapitem w-full">
+
+					@if (!empty ($pedidos))
+					    
+					@for ($i = 0; $i < sizeof($pedidos) ; $i++)
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="cozastore/images/item-cart-01.jpg" alt="IMG">
+							<img src="img/{{ $pedidos[$i]->photo }}" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
+								{{ $pedidos[$i]->des }}
 							</a>
 
 							<span class="header-cart-item-info">
-								1 x $19.00
+								1 x ${{ $pedidos[$i]->precio }}
 							</span>
 						</div>
 					</li>
+					@endfor
+					@else
+					<p>Sin pedidos</p>
+					@endif
 
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="cozastore/images/item-cart-02.jpg" alt="IMG">
-						</div>
 
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
 
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="cozastore/images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
 				</ul>
 				
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
+						Total: ${{ $total[0]->total }}
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
 						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
+							Ver carito
 						</a>
 					</div>
 				</div>

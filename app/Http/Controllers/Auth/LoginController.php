@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use App\productos;
 use Auth;
 use DB;
 use Session;
@@ -72,6 +73,7 @@ class LoginController extends Controller
         ]);
     $usuario=$request->get('usuario');
     $password=$request->get('password');
+    $Prod=Productos::all();
     
     $datos=DB::table('clientes')->select('usuario')
     ->where('usuario',$usuario)
@@ -89,13 +91,20 @@ class LoginController extends Controller
             ->where('usuario',$usuario)
             ->where('password',$password)
             ->get();
+            $cr=$cliente[0]->curp;
             Session::put('curp',$cliente[0]->curp);
             Session::put('nombre',$cliente[0]->nombre);
             Session::put('apellidop',$cliente[0]->apellidop);
             Session::put('apellidom',$cliente[0]->apellidom);
-            
+            $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
 
-                return  view('front.index');
+            $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+            $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+
+                return  view('front.index')->with('productos',$Prod)
+                ->with('pedidos',$pedidos)
+                ->with('total',$total)
+                ->with('numero',$num);
                 }
             else{
               return back()->withErrors(['password'=>'Contraseña incorrecta'])
