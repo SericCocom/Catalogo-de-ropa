@@ -10,19 +10,21 @@ class Comentarios extends Model
     protected $table='comentarios';
 
    	// Se especificar la clave primaria
-   protected $primaryKey='id_usuario';
+   protected $primaryKey='cla';
    	//Solo cuando la PK no sea numerica
-   	public $incrementing=false;
+   	public $incrementing=true;
    	//Activo las etiquetas de tiempo
    	public $timestamps=true;
    	//Definimos los campos que van a recibir valor
    	protected $fillable=[
-   	'clave',
-    'talla',
-    'precioventa',
-    'preciocompra',
-    'id_album',
-    'categoria','photo','descripcion'
+   	'cla',
+    'id_usuario','created_at',
+    'updated_at',
+    'comentario',
+    'prenda',
+    'entregado',
+    'cancelado',
+    'preparado'
     
    	];
 

@@ -30,8 +30,8 @@
 						<img class="img-fluid" src="img/login.jpg" alt="">
 						<div class="hover">
 							<h4>Aun no tienes una cuenta?</h4>
-							<p>A que encontrarás todo lo que buscas, nuevas ofertas, nueva moda. Todo al alcance de un clic</p>
-							<a class="main_btn" href="#">Crea tu cuenta</a>
+							<p>Aquí encontrarás todo lo que buscas, nuevas ofertas, nueva moda. Todo al alcance de un clic</p>
+							<a class="main_btn" href="{{ url('invitado') }}">Entra como invitado</a>
 						</div>
 					</div>
 				</div>

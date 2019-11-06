@@ -185,6 +185,7 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{{ url('pedidos') }}">Ver pedidos</a></li>
             <li><a href="{{ route('prod') }}">Ver productos</a></li>
             <li><a href="{{ url('ima') }}">Subir album</a></li>
             

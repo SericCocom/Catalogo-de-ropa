@@ -83,20 +83,34 @@
 							<li>
 								{{ Session::get('nombre') }} {{ Session::get('apellidop') }} {{ Session::get('apellidom') }}
 							</li>
-
-							<li>
-								<a href="product.html">Productos</a>
+							@if (Session::get('curp')!='')
+								<li>
+								<a href="{{ url('invitado') }}">Inicio</a>
 							</li>
+							@endif
+							
 
-							<li class="label1" data-label1="Nuevo">
-								<a href="shoping-cart.html">Mi carrito</a>
+							@if (Session::get('curp')!='')
+							<li class="label1" data-label1="{{ $numero[0]->num }}">
+								<a href="{{ url('micarrito') }}">Mi carrito</a>
 							</li>
+							@endif
 							<li>
 								<a href="{{ url('about') }}">A cerca de </a>
 							</li>
 							<li>
 								<a href="contact.html">Contacto</a>
 							</li>
+							@if (Session::get('curp')!='')
+							<li  >
+								<a href="{{ url('logoutcli') }}">Salir</a>
+							</li>
+							@endif
+							@if (Session::get('curp')=='')
+							<li  >
+								<a href="{{ url('login_cli') }}">Iniciar sesión</a>
+							</li>
+							@endif
 						</ul>
 					</div>	
 
@@ -123,7 +137,7 @@
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
 				
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="{{ $numero[0]->num }}">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
@@ -158,13 +172,22 @@
 					<a href="product.html">Tienda</a>
 				</li>
 
-				<li>
-					<a href="shoping-cart.html" class="label1 rs1" data-label1="Nuevo">Mi carrito</a>
-				</li>
-
-				<li>
-					<a href="{{ url('about') }}">Nosotros</a>
-				</li>
+							@if (Session::get('curp')!='')
+							<li class="label1" data-label1="{{ $numero[0]->num }}">
+								<a href="shoping-cart.html">Mi carrito</a>
+							</li>
+							@endif
+							<li>
+								<a href="{{ url('about') }}">A cerca de </a>
+							</li>
+							<li>
+								<a href="contact.html">Contacto</a>
+							</li>
+							@if (Session::get('curp')!='')
+							<li  >
+								<a href="{{ url('logoutcli') }}">Salir</a>
+							</li>
+							@endif
 
 				<li>
 					<a href="contact.html">Contacto</a>
@@ -222,13 +245,17 @@
 				
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
-						Total: ${{ $total[0]->total }}
+						@if (Session::get('curp')!='')
+							Total: ${{ $total[0]->total }}
+						@endif
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						@if (Session::get('curp')!='')
+							<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							Ver carito
 						</a>
+						@endif
 					</div>
 				</div>
 			</div>
@@ -281,7 +308,11 @@
 								<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
 										<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
 										<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									 @if (Session::get('curp')!='')
+									 	Registra a tu amigo	
+									 @else
 									 Quiero una cuenta !!
+									 @endif
 								</div>
 
 						</div>

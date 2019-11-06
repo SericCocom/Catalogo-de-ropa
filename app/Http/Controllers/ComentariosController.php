@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comentarios;
 use Session;
+use DB;
 
 class ComentariosController extends Controller
 {
@@ -15,8 +16,11 @@ class ComentariosController extends Controller
      */
     public function index()
     {
-       $comentario =  Comentarios::all();
-       return $comentario;
+       
+       return DB::select("SELECT productos.precioventa  AS precio,productos.photo as photo,Comentarios.created_at AS 'fecha',
+            CONCAT(clientes.nombre,' ',clientes.apellidop,' ',clientes.apellidom) as 'nombre', comentarios.entregado AS 'entregado',
+                productos.clave as 'clave',comentarios.preparado as preparado
+            FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNER JOIN clientes ON clientes.curp=comentarios.id_usuario WHERE comentarios.cancelado='NO' AND comentarios.entregado='NO' ORDER BY comentarios.created_at ASC");
     }
 
     /**
@@ -37,8 +41,10 @@ class ComentariosController extends Controller
 
     public function show($id)
     {
-        $id=Session::get('curp');
-        return Comentarios::all()->where('id_usuario',$id);
+        return DB::select("SELECT productos.precioventa  AS precio,productos.photo as photo,comentarios.created_at AS 'fecha',
+CONCAT(clientes.nombre,' ',clientes.apellidop,' ',clientes.apellidom) as 'nombre', comentarios.entregado AS 'entregado',
+productos.clave as 'clave'
+FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNER JOIN clientes ON clientes.curp=comentarios.id_usuario");
     }
 
     /**
@@ -63,4 +69,5 @@ class ComentariosController extends Controller
     {
         //
     }
+
 }

@@ -2,7 +2,7 @@
 @section('title')
 <title>Inicio</title>
 <meta name="token" id="token" value="{{ csrf_token() }}">
-	<meta name="route" id="route" value="{{url('/')}}">
+<meta name="route" id="route" value="{{url('/')}}">
 @endsection
 @section('Ban')
 <!-- Slider -->
@@ -10,7 +10,6 @@
 		<div class="wrap-slick1">
 			<div class="slick1">
 				<div class="item-slick1" style="background-image: url(cozastore/images/slide-01.jpg);">
-
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -26,14 +25,11 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-									Ver más
-								</a>
+								
 							</div>
 						</div>
 					</div>
 				</div>
-
 				
 
 				<div class="item-slick1" style="background-image: url(cozastore/images/slide-03.jpg);">
@@ -52,9 +48,7 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-									 Ver más
-								</a>
+								
 							</div>
 						</div>
 					</div>
@@ -84,11 +78,7 @@
 								</span>
 							</div>
 
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Comprar ahora
-								</div>
-							</div>
+							
 						</a>
 					</div>
 				</div>
@@ -107,13 +97,7 @@
 								<span class="block1-info stext-102 trans-04">
 									Colección <script>document.write(new Date().getFullYear());</script> 
 								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Comprar ahora
-								</div>
-							</div>
+							</div>						
 						</a>
 					</div>
 				</div>
@@ -414,9 +398,12 @@
 								@{{ descripcion }}
 							</p>
 							<br>
-							<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" v-on:click="addComent()">
+							@if (Session::get('curp')!='')
+								<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" v-on:click="addComent()">
 											Add to cart
 							</button>
+							@endif
+							
 
 					</div>
 					<div style="clear: both"></div>

@@ -135,6 +135,18 @@ class LoginController extends Controller
     unset($_SESSION);
     return Redirect::to('/');
    }
+    public function salircli()
+   {
+    Session::flush();
+    Session::reflash();
+    Cache::flush();
+    Cookie::forget('laravel_session');
+    //unset($_COOKIE);
+    unset($_SESSION);
+    return Redirect::to('login_cli');
+   }
+
+
 
    public function Mutuarios(){
       return view('admin.views.mutuarios');
@@ -144,6 +156,46 @@ class LoginController extends Controller
     }
     public function Cotizar(){
       return view('admin.views.productos');
+    }
+    public function Invitado(){
+               $Prod=Productos::all();
+              $cr=Session::get('curp');
+              $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+
+              $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+             $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+                return  view('front.index')->with('productos',$Prod)
+                ->with('pedidos',$pedidos)
+                ->with('total',$total)
+                ->with('numero',$num);
+    }
+    //retorna vista Acerca de
+    public function About(){
+      $Prod=Productos::all();
+              $cr=Session::get('curp');
+              $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+
+              $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+             $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+
+                return  view('front.about')->with('productos',$Prod)
+                ->with('pedidos',$pedidos)
+                ->with('total',$total)
+                ->with('numero',$num);
+    }
+    //retorna vista mi carrito
+    public function MyCarrito(){
+      $Prod=Productos::all();
+              $cr=Session::get('curp');
+              $pedidos=DB::select("SELECT comentarios.cla as codigo, productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+
+              $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+             $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+
+                return  view('front.micarrito')->with('productos',$Prod)
+                ->with('pedidos',$pedidos)
+                ->with('total',$total)
+                ->with('numero',$num);
     }
 
 
