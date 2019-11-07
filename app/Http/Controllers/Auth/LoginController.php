@@ -73,7 +73,7 @@ class LoginController extends Controller
         ]);
     $usuario=$request->get('usuario');
     $password=$request->get('password');
-    $Prod=Productos::all();
+    $Prod=DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
     
     $datos=DB::table('clientes')->select('usuario')
     ->where('usuario',$usuario)
@@ -158,9 +158,9 @@ class LoginController extends Controller
       return view('admin.views.productos');
     }
     public function Invitado(){
-               $Prod=Productos::all();
+               $Prod=DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
               $cr=Session::get('curp');
-              $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+              $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo,albums.album as album  FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNER JOIN albums on productos.id_album=albums.id_album WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
 
               $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
              $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
@@ -171,7 +171,7 @@ class LoginController extends Controller
     }
     //retorna vista Acerca de
     public function About(){
-      $Prod=Productos::all();
+      $Prod=DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
               $cr=Session::get('curp');
               $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
 
@@ -185,7 +185,7 @@ class LoginController extends Controller
     }
     //retorna vista mi carrito
     public function MyCarrito(){
-      $Prod=Productos::all();
+      $Prod=DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
               $cr=Session::get('curp');
               $pedidos=DB::select("SELECT comentarios.cla as codigo, productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
 

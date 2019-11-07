@@ -16,7 +16,7 @@ class ListController extends Controller
      */
     public function index()
     {
-        $productos = Productos::all();
+        $productos = DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
         return $productos;
 
     }
@@ -61,7 +61,7 @@ class ListController extends Controller
 
       public function Vistas()
     {
-             $productos=Productos::all();
+        $productos=DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
         return view('front.index')->with('productos',$productos);
     }
 

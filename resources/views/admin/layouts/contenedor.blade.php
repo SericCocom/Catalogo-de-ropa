@@ -185,8 +185,8 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('pedidos') }}">Ver pedidos</a></li>
-            <li><a href="{{ route('prod') }}">Ver productos</a></li>
+            
+            <li><a href="{{ route('prod') }}">Ver prendas</a></li>
             <li><a href="{{ url('ima') }}">Subir album</a></li>
             
             
@@ -206,6 +206,21 @@ desired effect
             
           </ul>
         </li>
+
+        <li class="treeview">
+          <a href=""><i class=""></i> <span>Pedidos</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+           <li><a href="{{ url('pedidos') }}">Ver pedidos</a></li>
+            <li><a href="{{url('resumen') }}">Resumen</a></li>
+            
+          </ul>
+        </li>
+
+
 
 
 
@@ -255,7 +270,7 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="adminlte/jquery/dist/jquery.min.js"></script>
+
 <!-- Bootstrap 3.3.7 -->
 <script src="adminlte/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->

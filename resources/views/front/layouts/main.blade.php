@@ -229,6 +229,11 @@
 								{{ $pedidos[$i]->des }}
 							</a>
 
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Album: {{ $pedidos[$i]->album }}
+							</a>
+
+
 							<span class="header-cart-item-info">
 								1 x ${{ $pedidos[$i]->precio }}
 							</span>

@@ -69,5 +69,12 @@ FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNE
     {
         //
     }
+    public function DataTable(){
+        $pedidos=DB::select("SELECT productos.precioventa  AS precio,Comentarios.created_at AS 'fecha',
+            CONCAT(clientes.nombre,' ',clientes.apellidop,' ',clientes.apellidom) as 'nombre', comentarios.entregado AS 'entregado',
+                productos.clave as 'clave',comentarios.preparado as preparado
+            FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNER JOIN clientes ON clientes.curp=comentarios.id_usuario INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI' ORDER BY comentarios.created_at ASC");
+        return view('admin.views.resumen')->with('pedidos',$pedidos);
+    }
 
 }

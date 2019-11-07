@@ -226,12 +226,14 @@ Prendas
                 <thead>
                   <th width="1%">Album</th>
                   <th width="1%">Creación</th>
-                   <th width="1%">Publicación</th>
+                   <th width="1%">Publicado</th>
+                    <th width="1%">Publicación</th>
                   <th width="5%">Opciones</th>
                 </thead>
                 <tr v-for="album in albums">
                     <td>@{{album.album}}</td>
                     <td>@{{album.created_at}}</td>
+                    <td>@{{album.publicado}}</td>
                     <td>@{{album.fecha_publica}}</td>
                     <td>
                 {{-- <span class="glyphicon glyphicon-cog btn btn-sm"v-on:click="asigSelected(index)"></span> --}}

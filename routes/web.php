@@ -28,6 +28,8 @@ Route::get('micarrito','Auth\LoginController@MyCarrito');
 
 
 Route::get('inicio','ListController@Vistas');
+Route::get('resumen','ComentariosController@DataTable');
+
 Route::apiResource('listas','ListController');
 
 
