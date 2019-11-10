@@ -4,7 +4,7 @@
 	@yield('title')
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<input type="hidden" name="route" value="{{url('/')}}">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="cozastore/images/icons/favicon.png"/>
 <!--===============================================================================================-->
@@ -174,7 +174,7 @@
 
 							@if (Session::get('curp')!='')
 							<li class="label1" data-label1="{{ $numero[0]->num }}">
-								<a href="shoping-cart.html">Mi carrito</a>
+								<a href="{{ url('micarrito') }}">Mi carrito</a>
 							</li>
 							@endif
 							<li>
@@ -257,7 +257,7 @@
 
 					<div class="header-cart-buttons flex-w w-full">
 						@if (Session::get('curp')!='')
-							<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							<a href="{{ url('micarrito') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							Ver carito
 						</a>
 						@endif

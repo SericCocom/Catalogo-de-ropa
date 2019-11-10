@@ -1,11 +1,12 @@
 function init(){
+var route = document.querySelector("[name=route]").value;
 
-var Url='http://localhost/CasaEmp/public/productos'
+var Url= route + '/productos';
 
-var UrlCat='http://localhost/CasaEmp/public/categorias'
-var UrlAl='http://localhost/CasaEmp/public/albums'
-
-
+var UrlCat= route + '/categorias'; 
+var UrlAl=  route + '/albums';
+var UrlPub=route +'/publicar'
+var UrlCancel=route +'/baja'
 new Vue({
 	http:{
 			headers:{
@@ -30,7 +31,18 @@ new Vue({
 			productos:[],
 			categorias:[],
 			auxCategoria:'',
+
+
+			//area albums
 			albums:[],
+			nomAlbum:'',
+			fechapub:'',
+
+
+
+
+
+
 			editando:false,
 			auxClave:'',
 			encontrado:false,
@@ -219,12 +231,13 @@ new Vue({
 					function(response){
 					this.id_album=response.data.id_album;
 					this.album=response.data.album;
-					this.auxAlbum=response.data.id_album
+					this.fechapub=response.data.fecha_publica;
+					this.auxAlbum=response.data.id_album;
 					});
 
 				},
 			showModalAl:function(){
-				alert('Agregar');
+				alert('Agregar album');
 				$('#add_album').modal('show');
 			},
 				hideModaAl:function(){
@@ -256,7 +269,34 @@ new Vue({
 				this.auxClave='';
 				this.imagen='fotoportada.jpg';
 				this.descripcion='';
-				}
+				},
+				//area para albumes
+				publicarAlbum:function(id,nombre){
+					var clave={id_album:id}
+					var Confirmar=confirm('Esta seguro de publicar el album '+ nombre+'?');
+					if (Confirmar) {
+							this.$http.post(UrlPub,clave).then(
+						function(response){
+						alert(response.data);
+						this.getAlbums();
+					});
+
+						
+					}
+				},
+				cancelarAlbum:function(id,nombre){
+					var clave={id_album:id}
+					var Confirmar=confirm('Esta seguro de descartar el album '+ nombre+'?');
+					if (Confirmar) {
+							this.$http.post(UrlCancel,clave).then(
+						function(response){
+						alert(response.data);
+						this.getAlbums();
+					});
+
+						
+					}
+				},
 
 
 

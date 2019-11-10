@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Albums;
-
+use DB;
 class AlbumsController extends Controller
 {
     /**
@@ -62,4 +62,31 @@ class AlbumsController extends Controller
     {
         //
     }
+    public function PublicarAlbum(Request $request){
+
+         // DB::table('albums')
+           //     ->where('id_album', $request->get('id_album'))
+             //   ->update(['publicado' => 'SI']);
+        //return 'El album ha sido publicado';
+        $id_album=$request->get('id_album');
+        $album=Albums::find($id_album);
+        $album->publicado='SI';
+        $album->update();
+        return 'Album publicado';
+    }
+    public function CancelarAlbum(Request $request){
+
+         // DB::table('albums')
+           //     ->where('id_album', $request->get('id_album'))
+             //   ->update(['publicado' => 'SI']);
+        //return 'El album ha sido publicado';
+        $id_album=$request->get('id_album');
+        $album=Albums::find($id_album);
+        $album->publicado='NO';
+        $album->update();
+        return 'Album cancelado';
+    }
+
+
+
 }

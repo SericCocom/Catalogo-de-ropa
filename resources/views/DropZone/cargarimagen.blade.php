@@ -16,6 +16,7 @@ Catalogo
 @endsection
 @section('content')
 <div class="form-group">
+	
     <div class="dropzone">
         
     </div>

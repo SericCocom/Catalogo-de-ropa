@@ -1,7 +1,7 @@
 function init(){
-
-var Url='http://localhost/CasaEmp/public/listas'
-var UrlComen='http://localhost/CasaEmp/public/comentarios'
+var route = document.querySelector("[name=route]").value;
+var Url=route +'/listas'
+var UrlComen=route +'/comentarios'
 new Vue({
 	http:{
 			headers:{
@@ -48,32 +48,15 @@ new Vue({
 					}
 					var Confirmar=confirm('Esta seguro de encargar esta prenda?');
 					if (Confirmar) {
-						this.validarComent();
-						if (this.encontrado==false) {
+						
 							this.$http.post(UrlComen,Comentario).then(
 						function(response){
-						console.log(response);
+						alert(response.data);
+						$('#modal1').modal('hide');
 					});
 
-						}
+						
 					}
-				},
-				validarComent:function(){
-					this.$http.get(UrlComen + '/').then(
-						function(response){
-						console.log(response);
-						this.comentarios=response.data;
-						alert(response.length);
-						for (var i = this.comentarios.length - 1; i >= 0; i--) {
-							alert(this.come.prenda);
-							if (response[i].data.prenda==this.clave) {
-								this.encontrado=true;
-								alert('Usted ya encargó esta prenda');
-							}
-						}
-
-
-					});
 				}
 		}
 });

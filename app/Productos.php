@@ -22,7 +22,7 @@ class Productos extends Model
     'precioventa',
     'preciocompra',
     'id_album',
-    'categoria','photo','descripcion'
+    'categoria','photo','descripcion','vendido'
     
    	];
 

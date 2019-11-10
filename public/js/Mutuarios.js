@@ -1,7 +1,7 @@
 function init(){
-
-var Url='http://localhost/CasaEmp/public/mutuarios'
-var UrlSoli='http://localhost/CasaEmp/public/solicitudes'
+var route = document.querySelector("[name=route]").value;
+var Url=route+ '/mutuarios'
+var UrlSoli= route+'/solicitudes'
 new Vue({
 	http:{
 			headers:{

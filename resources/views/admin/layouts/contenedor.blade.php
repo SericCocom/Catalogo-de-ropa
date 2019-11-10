@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--
+<!-- 
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="token" id="token" value="{{ csrf_token() }}">
-  <meta name="route" id="route" value="{{url('/')}}">
+ <input type="hidden" name="route" value="{{url('/')}}">
 
 
   <title>PuntoVenta | @yield('title')</title>
@@ -73,7 +73,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a  class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>E</span>
       <!-- logo for regular state and mobile devices -->
@@ -83,7 +83,8 @@ desired effect
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      
+       <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
       <!-- Navbar Right Menu -->
@@ -99,34 +100,30 @@ desired effect
            
             
           </li>
-          <!-- Tasks Menu -->
-          
-          <!-- User Account Menu -->
+
           <li class="dropdown user user-menu">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              
-              <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{ Session::get('nombre') }} {{ Session::get('apellidop') }} {{ Session::get('apellidom') }}</span>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <img src="img/fotoportada.jpg" class="user-image" alt="User Image">
+                <span class="hidden-xs">{{ Session::get('nombre') }} {{ Session::get('apellidop') }} {{ Session::get('apellidom') }}</span>
             </a>
             <ul class="dropdown-menu">
-              <!-- The user image in the menu -->
+              <!-- User image -->
               <li class="user-header">
                 
-                <h3>
+
+                <p>
+                   <h3>
                  FOTO
                   
                 </h3>
                 <h6>  {{ Session::get('curp') }} </h6>
                 <h6>{{ Session::get('rol') }}</h6>
+                </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
-                
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
+              
+              
+               <!-- Menu Footer-->
               <li class="user-footer">
                 
                 <div class="pull-right">
@@ -135,6 +132,9 @@ desired effect
               </li>
             </ul>
           </li>
+
+          <!-- Tasks Menu -->
+          
           <!-- Control Sidebar Toggle Button -->
           <li>
             

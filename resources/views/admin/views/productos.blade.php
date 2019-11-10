@@ -1,5 +1,5 @@
 @extends('admin.layouts.contenedor')
-
+ 
 @section('title')
 Prendas
 @endsection
@@ -9,7 +9,7 @@ Prendas
 
 @endsection
 @section('content')
-<div class="box" id="Productos">
+<div class="table-responsive" id="Productos">
           
           
             <div class="box-header">
@@ -122,7 +122,8 @@ Prendas
                         <input type="text" name="" placeholder="Precio venta" v-model="precioventa" class="form-control">
                         <br>
                         <input type="text" name="" placeholder="Precio compra" v-model="preciocompra" class="form-control">
-                        <input type="text" name="" placeholder="Descripcion" v-model="descripcion" >
+                        <br>
+                        <input type="text" name="" placeholder="Descripcion" v-model="descripcion" class="form-control">
                         <br>
                       
                         <br>
@@ -214,7 +215,7 @@ Prendas
                 
 
      <div class="modal fade" tabindex="-1" role="dialog" id="album">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         
@@ -233,7 +234,8 @@ Prendas
                 <tr v-for="album in albums">
                     <td>@{{album.album}}</td>
                     <td>@{{album.created_at}}</td>
-                    <td>@{{album.publicado}}</td>
+                    <td>@{{album.publicado}}  <span class="fa fa-check btn btn-sm" v-on:click="publicarAlbum(album.id_album,album.album)" v-if="album.publicado=='NO'"></span>
+                     <span class="fa fa-times  btn btn-sm" v-on:click="cancelarAlbum(album.id_album,album.album)" v-if="album.publicado=='SI'"></span></td>
                     <td>@{{album.fecha_publica}}</td>
                     <td>
                 {{-- <span class="glyphicon glyphicon-cog btn btn-sm"v-on:click="asigSelected(index)"></span> --}}
@@ -271,7 +273,7 @@ Prendas
                           <input type="text" name="form-control" placeholder="Clave" v-model="id_album">
       
                          <input type="text" name="form-control" placeholder="Nombre de album" v-model="album">
-
+                         <input type="datetime-local" v-model="fechapub">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" v-on:click="hideModaAl()">Close</button>

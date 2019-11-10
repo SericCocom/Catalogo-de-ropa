@@ -2,7 +2,7 @@
 @section('title')
 <title>Inicio</title>
 <meta name="token" id="token" value="{{ csrf_token() }}">
-<meta name="route" id="route" value="{{url('/')}}">
+<input type="hidden" name="route" value="{{url('/')}}">
 @endsection
 @section('Ban')
 <!-- Slider -->
@@ -349,14 +349,14 @@
 							<img src="img/{{ $productos[$i]->photo }}" alt="IMG-PRODUCT">
 
 							<a  class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" v-on:click="editProducto({{ $productos[$i]->clave }})">
-								Quick View
+								Ver
 							</a>
 						</div>
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									{{ $productos[$i]->id_album }}
+									{{ $productos[$i]->album }}
 								</a>
 
 								<span class="stext-105 cl3">
@@ -397,10 +397,13 @@
 							<p class="stext-102 cl3 p-t-23">
 								@{{ descripcion }}
 							</p>
+							<p class="stext-102 cl3 p-t-23">
+								Talla: @{{ talla }}
+							</p>
 							<br>
 							@if (Session::get('curp')!='')
 								<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" v-on:click="addComent()">
-											Add to cart
+											Encargar
 							</button>
 							@endif
 							
@@ -410,7 +413,7 @@
                     </div>
                    	
             </div><!-- /.modal-dialog -->
-        </div>
+        </div> 
     </div><!-- /.modal -->
 
 

@@ -10,12 +10,30 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//prueba leer codigo de barras
+Route::get('codigo', function () {
+   //vista para logueo de clientes
+    return view('leercodigo');
+});
 
+Route::get('fpdf','FpdfController@ImprimirPDF');
 
 Route::get('login_cli', function () {
    //vista para logueo de clientes
     return view('front.login');
 });
+//cancelar pedido
+Route::post('cancelar','ComentariosController@cancelar')->name('cancelar');
+//preparar pedido
+Route::post('preparar','ComentariosController@preparar')->name('preparar');
+//despreparar pedido
+Route::post('despreparar','ComentariosController@despreparar')->name('despreparar');
+//entregar pedido
+Route::post('entregar','ComentariosController@entregar')->name('entregar');
+//publica un album
+Route::post('publicar','AlbumsController@PublicarAlbum')->name('publicar');
+//cancela un album
+Route::post('baja','AlbumsController@CancelarAlbum')->name('baja');
 
 //abre pagina about sin logueo
 Route::get('about','Auth\LoginController@About');
@@ -28,6 +46,7 @@ Route::get('micarrito','Auth\LoginController@MyCarrito');
 
 
 Route::get('inicio','ListController@Vistas');
+//muestra el resumen de todos los pedidos
 Route::get('resumen','ComentariosController@DataTable');
 
 Route::apiResource('listas','ListController');

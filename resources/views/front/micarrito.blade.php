@@ -2,7 +2,7 @@
 @section('title')
 <title>Mi carrito</title>
 <meta name="token" id="token" value="{{ csrf_token() }}">
-<meta name="route" id="route" value="{{url('/')}}">
+
 @endsection
 @section('Contenido')
 <br>

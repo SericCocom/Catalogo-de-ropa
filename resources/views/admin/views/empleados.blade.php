@@ -8,7 +8,7 @@ Empleados
 
 @endsection
 @section('content')
-<div class="box" id="Empleado">
+<div class="table-responsive" id="Empleado">
           
           
 

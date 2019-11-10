@@ -70,7 +70,7 @@ class LoginController extends Controller
             'usuario'=>'required|string',
             'password'=>'required|string'
 
-        ]);
+        ]); 
     $usuario=$request->get('usuario');
     $password=$request->get('password');
     $Prod=DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
@@ -96,10 +96,10 @@ class LoginController extends Controller
             Session::put('nombre',$cliente[0]->nombre);
             Session::put('apellidop',$cliente[0]->apellidop);
             Session::put('apellidom',$cliente[0]->apellidom);
-            $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+            $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo,albums.album as album  FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNER JOIN albums on productos.id_album=albums.id_album WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
 
-            $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
-            $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+            $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
+            $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
 
                 return  view('front.index')->with('productos',$Prod)
                 ->with('pedidos',$pedidos)
@@ -160,10 +160,10 @@ class LoginController extends Controller
     public function Invitado(){
                $Prod=DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
               $cr=Session::get('curp');
-              $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo,albums.album as album  FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNER JOIN albums on productos.id_album=albums.id_album WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+              $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo,albums.album as album  FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNER JOIN albums on productos.id_album=albums.id_album WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
 
-              $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
-             $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+              $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
+             $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
                 return  view('front.index')->with('productos',$Prod)
                 ->with('pedidos',$pedidos)
                 ->with('total',$total)
@@ -173,10 +173,10 @@ class LoginController extends Controller
     public function About(){
       $Prod=DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
               $cr=Session::get('curp');
-              $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+              $pedidos=DB::select("SELECT productos.precioventa  as precio,productos.descripcion as des,productos.photo,albums.album as album  FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNER JOIN albums on productos.id_album=albums.id_album WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
 
-              $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
-             $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+              $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
+             $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
 
                 return  view('front.about')->with('productos',$Prod)
                 ->with('pedidos',$pedidos)
@@ -187,10 +187,10 @@ class LoginController extends Controller
     public function MyCarrito(){
       $Prod=DB::select("SELECT * FROM productos INNER JOIN albums ON albums.id_album=productos.id_album WHERE albums.publicado='SI'");
               $cr=Session::get('curp');
-              $pedidos=DB::select("SELECT comentarios.cla as codigo, productos.precioventa  as precio,productos.descripcion as des,productos.photo FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+              $pedidos=DB::select("SELECT productos.precioventa  as precio,comentarios.cla as codigo,productos.descripcion as des,productos.photo,albums.album as album  FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNER JOIN albums on productos.id_album=albums.id_album WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
 
-              $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
-             $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO'");
+              $total=DB::select("SELECT SUM(productos.precioventa) as 'total' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
+             $num=DB::select("SELECT COUNT(productos.clave) as 'num' FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda WHERE comentarios.id_usuario='$cr' AND comentarios.entregado='NO' AND comentarios.cancelado='NO'");
 
                 return  view('front.micarrito')->with('productos',$Prod)
                 ->with('pedidos',$pedidos)

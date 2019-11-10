@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Productos;
-
+use App\Albums;
 class ImagenController extends Controller
 {
     /**
@@ -37,10 +37,10 @@ class ImagenController extends Controller
         $max = strlen($pattern)-1;
         for($i=0;$i < $longitud;$i++) $nombre .= $pattern{mt_rand(0,$max)};
 
-
     	$producto = new Productos;
     	$producto->photo=$nombre;
         $producto->clave=$nombre;
+       
     	$producto->save();
    		
     	$photo->move(public_path().'/img/',$nombre);

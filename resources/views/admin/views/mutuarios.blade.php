@@ -8,7 +8,7 @@ Clientes
 
 @endsection
 @section('content')
-<div class="box" id="Mutuario">
+<div class="table-responsive" id="Mutuario">
           
           
             <div class="box-header">

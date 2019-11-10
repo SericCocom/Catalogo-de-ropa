@@ -8,7 +8,7 @@ Vender
 
 @endsection
 @section('content')
-<div class="box" id="Cotizacion">
+<div class="table-responsive" id="Cotizacion">
           
           
 

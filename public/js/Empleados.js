@@ -1,6 +1,6 @@
 function init(){
-
-var Url='http://localhost/CasaEmp/public/empleados'
+var route = document.querySelector("[name=route]").value;
+var Url= route + '/empleados';
 
 new Vue({
 	http:{

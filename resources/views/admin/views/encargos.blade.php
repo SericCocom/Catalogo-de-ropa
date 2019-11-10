@@ -1,6 +1,6 @@
 @extends('admin.layouts.contenedor')
 @section('title')
-Encargos
+Encargos 
 @endsection
 @section('encabezado')
         Encargos
@@ -8,7 +8,7 @@ Encargos
 
 @endsection
 @section('content')
-<div class="box" id="encargos">
+<div class="table-responsive" id="encargos">
           
             <div class="box-header">
               
@@ -33,8 +33,9 @@ Encargos
               <td><img v-bind:src="`./img/${encargo.photo}`" style="width: 270px;height: 200px"></td>
               <td>$ @{{encargo.precio}}</td>
               <td>@{{encargo.fecha}}</td>
-              <td >@{{encargo.preparado}} </td>
-               <td>@{{encargo.entregado}}</td>
+              <td >@{{encargo.preparado}} <span class="fa fa-check btn btn-sm" v-on:click="prepararEncargo(encargo.clave,encargo.nombre)" v-if="encargo.preparado=='NO'"></span> <span class="fa fa-times  btn btn-sm" v-on:click="desprepararEncargo(encargo.clave,encargo.nombre)" v-if="encargo.preparado=='SI'"></span></td>
+               <td>@{{encargo.entregado}} <span class="fa fa-check btn btn-sm" v-on:click="entregarEncargo(encargo.clave,encargo.nombre)" v-if="encargo.entregado=='NO'"></span>
+                     </span></td>
               <td>
                 {{-- <span class="glyphicon glyphicon-cog btn btn-sm"v-on:click="asigSelected(index)"></span> --}}
 
