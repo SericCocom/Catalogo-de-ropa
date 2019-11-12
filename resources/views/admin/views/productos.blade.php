@@ -47,12 +47,7 @@ Prendas
               
               <div class="row">
   <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Buscar</button>
-      </span>
-      <input type="text" class="form-control">
-    </div>
+    
   </div>
 
             </div>
@@ -220,6 +215,10 @@ Prendas
                     <div class="modal-header">
                         
                         <h4 class="modal-title" >Albumes</h4>
+                        <br>
+                        <h5 class=" fa fa-eye">Ver</h5>
+                        <button class="btn-primary" v-on:click="getAlbumsPublicado()">Album publicado</button>
+                        <button class="btn-primary" v-on:click="getAlbumsNopublicado()">Album no publicado</button>
                         
                     </div>
                     <div class="modal-body ">
@@ -273,7 +272,7 @@ Prendas
                           <input type="text" name="form-control" placeholder="Clave" v-model="id_album">
       
                          <input type="text" name="form-control" placeholder="Nombre de album" v-model="album">
-                         <input type="datetime-local" v-model="fechapub">
+                         <input type="date"  v-model="fechapub">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" v-on:click="hideModaAl()">Close</button>

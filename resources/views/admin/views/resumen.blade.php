@@ -23,7 +23,13 @@ Resumen
               
         
             <!-- /.box-header -->
-              <div class="box-body">
+              <div class="box-body" >
+                <div class="col-md-3">
+                  <button  class="btn btn-primary form-control" data-toggle="modal" data-target="#resumen">Reporte</button>
+                  <br>
+                  <br>
+                </div>
+
                <table class="table table-condensed table-bordered table-hover" id="pedidos">
                 <thead>
                   <th width="19%">Cliente</th>
@@ -51,6 +57,47 @@ Resumen
                     @endfor
 					
 			           </table>
+
+
+         <div class="modal fade" tabindex="-1" role="dialog" id="resumen">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        
+                       <h4 class="modal-title" >Reporte de pedidos</h4>
+                       
+                        
+                    </div>
+                    <div class="modal-body ">
+                    
+                     <form action="{{ url('fpdf') }}" method="GET">
+                        <select class="form-control" name="album">
+
+                         @for ($i = 0; $i <sizeof($albums) ; $i++)
+                           <option class="form-control" value="{{ $albums[$i]->id_album }}">{{ $albums[$i]->album }}</option>
+                         @endfor
+                       </select>
+                      <br>
+                      <br>
+                      <button type="SUBMIT" class=" btn-primary">Generar PDF</button>
+                     </form>
+
+                       
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                         
+                        
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+
+
     		      </div>
 
                 
@@ -63,6 +110,7 @@ Resumen
 <script src="{{asset('js/datatable/vfs_fonts.js')}}"></script>
 <script src="{{asset('js/datatable/buttons.html5.min.js')}}"></script>
 <script src="{{asset('js/datatable/buttons.print.min.js')}}"></script>
+
   <script>
   
     //Initialize elements
@@ -70,7 +118,7 @@ Resumen
     $('#pedidos').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'excel', 'pdf', 'print'
+            'copy', 'excel','print'
         ]
     } );
 } );

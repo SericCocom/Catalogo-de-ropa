@@ -1,10 +1,10 @@
 function init(){
 var route = document.querySelector("[name=route]").value;
-
 var Url= route + '/productos';
-
 var UrlCat= route + '/categorias'; 
 var UrlAl=  route + '/albums';
+var UrlAlbumPublicado=route+'/albumpub'
+var UrlAlbumNOublicado=route+'/albumnopub'
 var UrlPub=route +'/publicar'
 var UrlCancel=route +'/baja'
 new Vue({
@@ -87,7 +87,7 @@ new Vue({
 					this.getAlbums();
 					$('#add_mutuario').modal('show');
 				},
-
+ 
 				addProducto:function(){
 					this.validaClave(this.clave);
 					let Producto = new FormData();
@@ -139,7 +139,6 @@ new Vue({
 					this.$http.get(Url + '/'+ id).then(
 					function(response){
 				this.clave= response.data.clave;
-				
 				this.talla= response.data.talla;
 				this.precioventa= response.data.precioventa;
 				this.preciocompra= response.data.preciocompra;
@@ -212,16 +211,18 @@ new Vue({
 					this.getAlbums();
 				},
 				addAlbum:function(){
+					
 					var Album={
-						id_album:this.id_album,album:this.album
+						id_album:this.id_album,album:this.album,fecha:this.fechapub
 					}
 
 					this.$http.post(UrlAl,Album).then(function(response){
 					  		this.getAlbums();
 					  		this.album='';
 					  		this.id_album='';
+					  		$('#add_album').modal('hide');
 					  })
-
+					
 				},
 					
 				editAlbum:function(id){
@@ -236,8 +237,8 @@ new Vue({
 					});
 
 				},
-			showModalAl:function(){
-				alert('Agregar album');
+				showModalAl:function(){
+				
 				$('#add_album').modal('show');
 			},
 				hideModaAl:function(){
@@ -284,9 +285,10 @@ new Vue({
 						
 					}
 				},
+				//descartar un album		
 				cancelarAlbum:function(id,nombre){
 					var clave={id_album:id}
-					var Confirmar=confirm('Esta seguro de descartar el album '+ nombre+'?');
+					var Confirmar=confirm('Esta seguro de descartar el album '+ nombre+'?, Esta accion no se puede revertir');
 					if (Confirmar) {
 							this.$http.post(UrlCancel,clave).then(
 						function(response){
@@ -297,6 +299,25 @@ new Vue({
 						
 					}
 				},
+				//obtiene todos los albumes publicados
+				getAlbumsPublicado:function(){
+					this.$http.get(UrlAlbumPublicado).then(
+					function(response){
+						console.log(response);
+						this.albums=response.data;
+					});
+
+				},
+				//obtiene todos los albumes no publicados
+				getAlbumsNopublicado:function(){
+					this.$http.get(UrlAlbumNOublicado).then(
+					function(response){
+						console.log(response);
+						this.albums=response.data;
+					});
+				}
+
+
 
 
 

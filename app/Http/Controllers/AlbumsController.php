@@ -14,10 +14,24 @@ class AlbumsController extends Controller
      */
     public function index()
     {
-        $albums = Albums::all();
+    
+        $albums = DB::select("SELECT * FROM albums WHERE cancelado='NO' ORDER BY fecha_publica ASC");
         return $albums;
 
     }
+    public function Publicado()
+    {
+        $albums = DB::select("SELECT * FROM albums WHERE publicado='SI' ORDER BY fecha_publica ASC");
+        return $albums;
+
+    }
+    public function NOpublicado()
+    {
+        $albums = DB::select("SELECT * FROM albums WHERE publicado='NO' ORDER BY fecha_publica ASC");
+        return $albums;
+
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -26,10 +40,11 @@ class AlbumsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
      $albums=new Albums;
      $albums->id_album =$request->get('id_album');
     $albums->album =$request->get('album');
+    $albums->fecha_publica =$request->get('fecha');
      $albums->save();
      return $albums;
 

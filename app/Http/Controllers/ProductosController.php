@@ -16,7 +16,7 @@ class ProductosController extends Controller
     {
         //
 
-        $productos = Productos::all();
+        $productos = Productos::all()->where('vendido','NO');
         return $productos;
 
     }

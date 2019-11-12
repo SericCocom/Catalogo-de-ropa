@@ -24,6 +24,7 @@ new Vue({
 			editando:false
 		}, 
 		methods:{
+			//Obtiene todos los encargos del controlador
 				getEncargos:function(){
 					this.$http.get(Url).then(
 					function(response){
@@ -31,6 +32,7 @@ new Vue({
 						this.encargos=response.data;
 					});
 				},
+				//Funcion que se carga desde el front para que un cliente cancele su pedido
 				cancelarEncargo:function(id){
 					var clave={codigo:id}
 					var Confirmar=confirm('Esta seguro de cancelar su encargo?');
@@ -53,7 +55,7 @@ new Vue({
 						this.getEncargos();
 					});
 
-						
+						 
 					}
 				},
 				desprepararEncargo:function(id,nombre){
@@ -69,8 +71,9 @@ new Vue({
 						
 					}
 				},
-				entregarEncargo:function(id,nombre){
-					var clave={codigo:id}
+				entregarEncargo:function(id,nombre,cliente,prenda){
+					alert(prenda);
+					var clave={codigo:id,cli:cliente,pren:prenda}
 					var Confirmar=confirm('Esta seguro de marcar como entregado el encargo de '+nombre+' ?');
 					if (Confirmar) {
 							this.$http.post(UrlEntre,clave).then(

@@ -40,6 +40,7 @@
 						<h3>Inicia sesión</h3>
 						<form class="row login_form" action="{{ route('loginCl') }}" method="post" id="contactForm" >
 							{{ csrf_field() }}
+							{!! $errors->first('noaut','<span class="help-block">:message</span>') !!}
 							<div class="col-md-12 form-group" {!! $errors->has('usuario') ? 'has-error':'' !!}  >
 								<input type="text" class="form-control" id="name" name="usuario" placeholder="Usuario" value="{{ old('usuario') }}">
 								 {!! $errors->first('usuario','<span class="help-block">:message</span>') !!}

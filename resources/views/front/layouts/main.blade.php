@@ -348,6 +348,7 @@
 									<br>
 									<input type="text" name="direccion" placeholder="Dirrección" class="form-control {!! $errors->has('direccion') ? 'has-error':'' !!} " value="{{ old('direccion') }}"  >
 									 {!! $errors->first('direccion','<span class="help-block">:message</span>') !!}
+									 <span class="help-block"><small>ejemplo:Calle7 x 6 y 12 Colonia San Juan, Mérida</small></span>
 									<br>
 									<input type="text" name="email" placeholder="Correo" class="form-control {!! $errors->has('email') ? 'has-error':'' !!} " value="{{ old('email') }}"  >
 									 {!! $errors->first('email','<span class="help-block">:message</span>') !!}

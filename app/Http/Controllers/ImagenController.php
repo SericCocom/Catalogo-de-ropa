@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Productos;
 use App\Albums;
+use DB;
 class ImagenController extends Controller
 {
     /**
@@ -26,11 +27,12 @@ class ImagenController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
     	$this-> validate(request(),[
     		'photo'=>'image|max:2048'
     	]);
          $photo= $request->file('photo');
+         $album=$request->get('album');
          $longitud=9;
           $nombre ='';
           $pattern = '1234567890';
@@ -40,6 +42,7 @@ class ImagenController extends Controller
     	$producto = new Productos;
     	$producto->photo=$nombre;
         $producto->clave=$nombre;
+        $producto->id_album=$album;
        
     	$producto->save();
    		
@@ -72,7 +75,12 @@ class ImagenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //return view('DropZone.cargarimagen');
+    }
+    public function Vista()
+    {
+        $albums=DB::select("SELECT * FROM albums WHERE cancelado='NO' ORDER BY fecha_publica ASC");
+        return view('DropZone.cargarimagen')->with('albums',$albums);
     }
 
 

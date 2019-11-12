@@ -29,12 +29,12 @@ Encargos
                 </thead>
 
                 <tr v-for="encargo in encargos">
-              <td>@{{encargo.nombre}}</td>
+              <td>@{{encargo.nombre}} || Entregar pedido en: @{{ encargo.direccion }}</td>
               <td><img v-bind:src="`./img/${encargo.photo}`" style="width: 270px;height: 200px"></td>
               <td>$ @{{encargo.precio}}</td>
               <td>@{{encargo.fecha}}</td>
               <td >@{{encargo.preparado}} <span class="fa fa-check btn btn-sm" v-on:click="prepararEncargo(encargo.clave,encargo.nombre)" v-if="encargo.preparado=='NO'"></span> <span class="fa fa-times  btn btn-sm" v-on:click="desprepararEncargo(encargo.clave,encargo.nombre)" v-if="encargo.preparado=='SI'"></span></td>
-               <td>@{{encargo.entregado}} <span class="fa fa-check btn btn-sm" v-on:click="entregarEncargo(encargo.clave,encargo.nombre)" v-if="encargo.entregado=='NO'"></span>
+               <td>@{{encargo.entregado}} <span class="fa fa-check btn btn-sm" v-on:click="entregarEncargo(encargo.clave,encargo.nombre,encargo.cliente,encargo.prenda)" v-if="encargo.entregado=='NO'"></span>
                      </span></td>
               <td>
                 {{-- <span class="glyphicon glyphicon-cog btn btn-sm"v-on:click="asigSelected(index)"></span> --}}

@@ -59,7 +59,7 @@ Route::get('/', function () {
 Route::apiResource('mutuarios','ClentesController');
 //visualiza solicitudes con vue
 Route::apiResource('solicitudes','SolicitudesController');
-//realiza pedido
+//revisa pedidos
 Route::apiResource('comentarios','ComentariosController');
 
 
@@ -68,7 +68,11 @@ Route::apiResource('comentarios','ComentariosController');
 Route::apiResource('empleados','EmpleadosController');
 Route::apiResource('productos','ProductosController');
 Route::apiResource('categorias','CategoriasController');
+//controlador de albumes
 Route::apiResource('albums','AlbumsController');
+Route::get('albumpub','AlbumsController@Publicado')->name('publicado');
+Route::get('albumnopub','AlbumsController@NOpublicado')->name('publicado');
+//fin controlador de albumes
 Route::post('login','Auth\LoginController@login')->name('login');
 //crea una solicitud de cuenta
 Route::post('solicitud','ClentesController@Solicitud')->name('solicitud');
@@ -87,9 +91,9 @@ Route::get('emplea', function () {
     //return view('admin.layouts.contenedor');
     return view('admin.mutuarios');
 });
-Route::get('ima',function(){
-	return view('DropZone.cargarimagen');
-});
+//regresa la vista con dropzone para subir imagenes
+Route::get('ima','ImagenController@Vista')->name('ima');
+
 Route::get('pedidos',function(){
     return view('admin.views.encargos');
 });
@@ -100,4 +104,5 @@ Route::get('pedidos',function(){
 Route::get('logout','Auth\LoginController@salir');
 //salir cliente
 Route::get('logoutcli','Auth\LoginController@salircli');
+//guardar imagen con dropzone
 Route::post('images-save', 'ImagenController@store')->name('images-save');
