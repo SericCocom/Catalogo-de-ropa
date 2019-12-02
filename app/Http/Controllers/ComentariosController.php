@@ -99,7 +99,7 @@ FROM comentarios INNER JOIN productos on productos.clave=comentarios.prenda INNE
     public function destroy($id)
     {
         //
-    }
+    } 
     public function DataTable(){
         $albums= DB::select("SELECT * FROM albums WHERE publicado='SI'");
         $pedidos=DB::select("SELECT productos.precioventa  AS precio,Comentarios.created_at AS 'fecha',

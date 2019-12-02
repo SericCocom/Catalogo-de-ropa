@@ -38,7 +38,7 @@ Resumen
                   <th width="15%">Precio </th>
                   <th width="15%">Fecha encargo</th>
                   
-                 
+                  
                 
                    <th width="5%">Preparado</th>
                      <th width="5%">Entregado</th>

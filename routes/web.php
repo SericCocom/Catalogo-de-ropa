@@ -40,7 +40,7 @@ Route::get('about','Auth\LoginController@About');
 //abre pagina sin logueo
 Route::get('invitado','Auth\LoginController@Invitado');
 //abre pagina mi carrito con logueo
-Route::get('micarrito','Auth\LoginController@MyCarrito');
+Route::get('micarrito','Auth\LoginController@MyCarrito'); 
 
 
 

@@ -17,9 +17,9 @@ MyDropzone.on('error',function (file,res) {
 //agrega el album a enviar mediante el id del componente
 MyDropzone.on('sending', function(file, xhr, formData){ 
 	var album= document.getElementById("album");
-	var albumclave= album.options[album.selectedIndex].value;
-	alert(albumclave);
-	formData.append('album', albumclave); 
+	var albumclave= album.options[album.selectedIndex].value; 
+	formData.append('album', albumclave);
+	 
 	album='';
 
 }); 
